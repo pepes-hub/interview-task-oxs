@@ -2,7 +2,9 @@
   "name": "@interview-task-oxs/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "startDashboard": "nx run dashboard:serve"
+  },
   "private": true,
   "dependencies": {
     "@swc/helpers": "~0.5.2",
