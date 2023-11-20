@@ -6,7 +6,7 @@ export const NavBar = () => {
   const { t } = useTranslation();
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar sx={navBarStyles.container}>
         <Typography variant="h5" component="div" sx={navBarStyles.title}>
           {t('labels.employees')}

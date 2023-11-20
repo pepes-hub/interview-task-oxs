@@ -8,7 +8,7 @@ interface PageWrapperProps {
 export const PageWrapper = ({ children }: PageWrapperProps) => {
   return (
     <Box sx={pageWrapperStyles.container}>
-      <Container maxWidth={'xl'}>{children}</Container>
+      <Container maxWidth={'lg'}>{children}</Container>
     </Box>
   );
 };
