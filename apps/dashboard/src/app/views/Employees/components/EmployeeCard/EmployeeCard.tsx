@@ -14,7 +14,14 @@ export const EmployeeCard = ({
   onUpdateStatus,
 }: EmployeeCardProps) => {
   return (
-    <Grid item sm={12} md={6} lg={4} sx={employeeCardStyles.container}>
+    <Grid
+      item
+      sm={12}
+      md={6}
+      lg={4}
+      sx={employeeCardStyles.container}
+      data-tile
+    >
       <Card sx={employeeCardStyles.card}>
         <Stack sx={employeeCardStyles.cardBody}>
           <Stack sx={employeeCardStyles.avatarContainer}>

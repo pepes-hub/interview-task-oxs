@@ -1,13 +1,42 @@
-import { getGreeting } from '../support/app.po';
-
 describe('dashboard-e2e', () => {
-  beforeEach(() => cy.visit('/'));
+  beforeEach(() => {
+    cy.visit('/');
+    cy.reload();
+  });
 
-  it('should display welcome message', () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login('my-email@something.com', 'myPassword');
+  it('should display page', () => {
+    cy.contains('Employees');
+  });
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains(/Welcome/);
+  it('should display 6 tiles by default', () => {
+    cy.intercept('GET', '/employees');
+
+    cy.get('[data-tile]').should('have.length', 6);
+  });
+
+  it('should display 2 tiles after filter', () => {
+    cy.intercept('GET', '/employees');
+
+    cy.get('[data-tile]').should('have.length', 6);
+
+    cy.get('[data-status-select]').parent().click();
+
+    cy.get(`[data-value="working"]`).click();
+
+    cy.get('[data-tile]').should('have.length', 2);
+  });
+
+  it('should display 2 tiles after search', () => {
+    cy.intercept('GET', '/employees');
+
+    cy.get('[data-tile]').should('have.length', 6);
+
+    cy.get('[data-status-search]').find('input').type('Jo');
+
+    cy.get('[data-tile]').should('have.length', 1);
+
+    cy.get('[data-status-search]').find('input').clear().type('le');
+
+    cy.get('[data-tile]').should('have.length', 2);
   });
 });

@@ -28,6 +28,7 @@ export const EmployeesToolbar = ({ onFilter }: EmployeesToolbarProps) => {
       </Button>
       <Box sx={employeesToolbarStyles.inputContainer}>
         <OutlinedInput
+          data-status-search
           placeholder={t('placeholders.search')}
           fullWidth
           sx={employeesToolbarStyles.textInput}
@@ -38,6 +39,7 @@ export const EmployeesToolbar = ({ onFilter }: EmployeesToolbarProps) => {
         <Box sx={employeesToolbarStyles.divider} />
         <Box sx={employeesToolbarStyles.select}>
           <EmployeeStatusSelect
+            data-status-select
             value={status}
             onChange={handleChangeStatus}
             withClearOption
