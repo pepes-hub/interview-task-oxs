@@ -1,6 +1,8 @@
 import { useEmployeesData } from '../../shared/hooks/useEmployeesData';
 import { useMemo, useState } from 'react';
 import { useApi } from '../../shared/hooks/API/useApi';
+import { useSnackbar } from '../../shared/providers/SnackbarProvider';
+import { useTranslation } from 'react-i18next';
 
 export const useEmployeesView = () => {
   const [filters, setFilters] = useState<{
@@ -10,6 +12,9 @@ export const useEmployeesView = () => {
     status: '',
     search: '',
   });
+
+  const { t } = useTranslation();
+  const { open } = useSnackbar();
 
   const { employees, refresh } = useEmployeesData();
   const { employeesAPI } = useApi();
@@ -42,7 +47,12 @@ export const useEmployeesView = () => {
       if (response) {
         refresh();
       }
-    } catch (error) {}
+    } catch (error) {
+      open({
+        message: t('errors.updateEmployeeStatus'),
+        severity: 'error',
+      });
+    }
   };
 
   return {
