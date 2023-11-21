@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 interface SelectProps {
   value: string;
   onChange: (value: string) => void;
+  withClearOption?: boolean;
+  variant?: 'standard' | 'outlined';
 }
 
 export const EmployeeStatusSelect = (props: SelectProps) => {
@@ -12,7 +14,6 @@ export const EmployeeStatusSelect = (props: SelectProps) => {
 
   return (
     <Select
-      withClearOption
       options={EMPLOYEE_STATUS_OPTIONS}
       placeholder={t('placeholders.filterByStatus')}
       {...props}

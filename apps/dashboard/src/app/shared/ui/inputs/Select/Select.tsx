@@ -2,12 +2,15 @@ import {
   Select as MuiSelect,
   SelectChangeEvent,
   MenuItem,
+  Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { employeeStatusSelectStyles } from '../EmployeeStatusSelect/EmployeeStatusSelect.styles';
 
 interface SelectOption {
   translationKey: string;
   value: string;
+  icon?: JSX.Element;
 }
 
 interface SelectProps {
@@ -16,6 +19,7 @@ interface SelectProps {
   onChange: (value: string) => void;
   placeholder?: string;
   withClearOption?: boolean;
+  variant?: 'standard' | 'outlined';
 }
 
 export const Select = ({
@@ -31,6 +35,28 @@ export const Select = ({
     onChange(val.target.value ?? '');
   };
 
+  const renderOption = (option: SelectOption, presentation = true) => {
+    return (
+      <MenuItem
+        value={option.value}
+        key={option.value}
+        sx={{
+          paddingLeft: presentation ? '2px' : undefined,
+          ...employeeStatusSelectStyles.menuItem,
+        }}
+      >
+        {option.icon && option.icon}
+        <Typography
+          sx={{
+            fontSize: restProps.variant === 'standard' ? '12px' : undefined,
+          }}
+        >
+          {t(option.translationKey)}
+        </Typography>
+      </MenuItem>
+    );
+  };
+
   const handleRenderValue = (value: string) => {
     if (!value) {
       return placeholder ?? t('labels.none');
@@ -40,7 +66,11 @@ export const Select = ({
       return option.value === value;
     });
 
-    return t(selectedOption?.translationKey ?? '');
+    if (selectedOption) {
+      return renderOption(selectedOption);
+    }
+
+    return '';
   };
 
   return (
@@ -49,16 +79,11 @@ export const Select = ({
       fullWidth
       onChange={handleOnChange}
       renderValue={handleRenderValue}
+      size={'small'}
       {...restProps}
     >
       {withClearOption && <MenuItem value="">{t('labels.none')}</MenuItem>}
-      {options.map((option) => {
-        return (
-          <MenuItem value={option.value} key={option.value}>
-            {t(option.translationKey)}
-          </MenuItem>
-        );
-      })}
+      {options.map((option) => renderOption(option, false))}
     </MuiSelect>
   );
 };
