@@ -13,7 +13,7 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: '#109CF2',
+      main: '#53b1ee',
       dark: '#0A8CEA',
     },
   },
@@ -40,7 +40,7 @@ export const theme = createTheme({
         root: {
           boxShadow: '0px 2px 17px -4px rgba(222, 221, 221, 1)',
           '&:hover': {
-            boxShadow: '0px 13px 24px -4px rgba(152, 219, 232, 1)',
+            boxShadow: '0px 13px 24px -4px rgba(85, 182, 245, 0.6)',
           },
         },
       },
